@@ -28,6 +28,7 @@ APK は `app/build/outputs/apk/debug/app-debug.apk` に出力されます。
 
 - 初回は Android SDK と Gradle 入りのイメージ(`clock-and-date-builder`)を作るため時間がかかります
 - Gradle のキャッシュは Docker ボリューム `clock-and-date-gradle-cache` に保存され、2回目以降のビルドが速くなります
+- APK の署名に使うデバッグ用の鍵は `.android/` に保存されます(Git には含めません)。このフォルダを消すと鍵が変わり、インストール済みのアプリを上書きできなくなります(一度アンインストールが必要です)
 
 PowerShell 以外から実行する場合は、次の2つのコマンドと同じです。
 
@@ -47,6 +48,19 @@ docker run --rm -v "$PWD:/project" -v clock-and-date-gradle-cache:/root/.gradle 
 
 時刻と日付は `TextClock` で表示しています。表示の更新はホーム画面アプリ側が行うため、このアプリが1分ごとに起動することはなく、電池への影響はほとんどありません。
 
+## ウィジェット選択画面のプレビュー
+
+本物のウィジェットには背景がありません。プレビューは白い文字が見えるよう、暗い角丸のカードの上に表示します。
+
+- Android 12 以降：`widget_preview.xml` のレイアウトで表示します。時刻は実際の現在時刻になります
+- Android 11 以前：画像 `widget_preview.png` を表示します
+
+見た目を変えたら、プレビュー画像も作り直してください(Docker を使います)。
+
+```powershell
+./tools/render_preview.ps1
+```
+
 ## ファイル構成
 
 | ファイル | 内容 |
@@ -55,9 +69,12 @@ docker run --rm -v "$PWD:/project" -v clock-and-date-gradle-cache:/root/.gradle 
 | `app/src/main/res/values/styles.xml` | 文字色・影・自動縮小の設定 |
 | `app/src/main/res/values/strings.xml` | 時刻・日付の表示形式 |
 | `app/src/main/res/xml/clock_widget_info.xml` | ウィジェットのサイズ・リサイズ設定 |
+| `app/src/main/res/layout/widget_preview.xml` | 選択画面のプレビュー(Android 12 以降) |
+| `app/src/main/res/drawable-nodpi/widget_preview.png` | 選択画面のプレビュー画像(Android 11 以前) |
 | `app/src/main/java/com/example/clockanddate/ClockWidgetProvider.kt` | タップ時の動作 |
 | `docker/Dockerfile` | ビルド用イメージ |
 | `build.ps1` | ビルドスクリプト |
+| `tools/render_preview.py` / `.ps1` | プレビュー画像の生成スクリプト |
 
 ## 注意点
 

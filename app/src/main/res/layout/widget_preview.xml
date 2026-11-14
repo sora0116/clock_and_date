@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Widget picker preview (Android 12+). The real widget has no background,
+     so the preview puts it on a dark card to keep the white text visible
+     on the picker's light or dark sheet. -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/widget_preview_background">
+
+    <include layout="@layout/widget_clock" />
+</FrameLayout>
