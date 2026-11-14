@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- No background: text sits directly on the wallpaper, with a soft shadow for legibility. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingStart="8dp"
+    android:paddingEnd="8dp">
+
+    <TextClock
+        android:id="@+id/time"
+        style="@style/WidgetText"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1.05"
+        android:autoSizeMaxTextSize="76sp"
+        android:autoSizeMinTextSize="36sp"
+        android:format12Hour="@string/time_format_12"
+        android:format24Hour="@string/time_format_24"
+        android:gravity="start|center_vertical"
+        android:letterSpacing="-0.03"
+        android:textSize="76sp" />
+
+    <TextClock
+        android:id="@+id/date"
+        style="@style/WidgetText"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:autoSizeMaxTextSize="23sp"
+        android:autoSizeMinTextSize="12sp"
+        android:format12Hour="@string/date_format"
+        android:format24Hour="@string/date_format"
+        android:gravity="end|center_vertical"
+        android:textSize="23sp" />
+</LinearLayout>

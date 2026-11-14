@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">時計と日付</string>
+    <string name="widget_name">時計と日付</string>
+    <string name="widget_description">現在時刻と日付を表示します</string>
+    <string name="time_format_12" translatable="false">h:mm</string>
+    <string name="time_format_24" translatable="false">H:mm</string>
+    <string name="date_format" translatable="false">MM月dd日(E)</string>
+</resources>
